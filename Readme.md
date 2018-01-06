@@ -10,7 +10,7 @@ inconsistently. Some functions accept non-ASCII strings only as `str` objects
 encoded in UTF-8, while other functions and methods accept both `str` and
 `unicode`. Also, most functions and methods that return text data return `str`
 objects also encoded in UTF-8, but a few of them return `unicode`.
-This makes addon developers to use *ad hoc* solutions for each case. For example,
+This makes addon developers use *ad hoc* solutions for each case. For example,
 strings that are passed to `xbmc.log()` function need to be checked if they are
 `unicode` objects and, if yes, encoded to `str` using UTF-8.
 
@@ -32,8 +32,8 @@ In Python 3 those wrappers do not do anything.
 ## Important Notes
 
 * Kodi Six wrappers normalize only string arguments and return values.
-  They do not touch strings inside containers like Python lists and dictionsries.
-* Kodi Six is an experimental library, so issue may happen in specific cases.
+  They do not touch strings inside containers like Python lists and dictionaries.
+* Kodi Six is an experimental library, so issues may happen in specific cases.
 
 ## Usage
 
@@ -80,7 +80,7 @@ addon = xbmcaddon.Addon()
 path = addon.getAddonInfo('path')
 
 some_string = u'текст українською мовою'
-xbmc.log(some_string)  # No need to and encode the string
+xbmc.log(some_string)  # No need to encode the string
 ```
 
 ## License
