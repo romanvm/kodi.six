@@ -83,6 +83,27 @@ some_string = u'текст українською мовою'
 xbmc.log(some_string)  # No need to encode the string
 ```
 
+## Utility Functions
+
+Kodi Six also provides convenience conditional functions for string encoding
+and decoding for cases when some API require/return `str` (bytes) in Python 2
+and `str` (Unicode) in Python 3. Those functions can be used to normalize string
+handling in both Python versions.
+
+```python
+# coding: utf-8
+
+from kodi_six.utils import py2_encode, py2_decode
+
+spam = u'спам'
+
+b = py2_encode(spam)  # Encode Unicode to str only in Python 2
+
+u = py2_decode(b)  # Decode str to Unicode only in Python 2
+
+# In Python 3 the Unicode string is not changed.
+```
+
 ## License
 
 [GPL v.3](https://www.gnu.org/licenses/gpl-3.0.en.html)
