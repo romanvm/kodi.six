@@ -1,6 +1,9 @@
 # coding: utf-8
 # Created on: 04.01.2018
 # Author: Roman Miroshnychenko aka Roman V.M. (roman1972@gmail.com)
+"""
+Utility functions for string conversion depending on Python version
+"""
 
 import sys
 import inspect
