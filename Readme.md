@@ -31,9 +31,9 @@ In Python 3 those wrappers do not do anything.
 
 ## Important Notes
 
+* Kodi Six is an experimental library, so issues may happen in specific cases.
 * Kodi Six wrappers normalize only string arguments and return values.
   They do not touch strings inside containers like Python lists and dictionaries.
-* Kodi Six is an experimental library, so issues may happen in specific cases.
 
 ## Usage
 
@@ -82,6 +82,11 @@ path = addon.getAddonInfo('path')
 some_string = u'текст українською мовою'
 xbmc.log(some_string)  # No need to encode the string
 ```
+
+## Known Issues
+
+* `xbmcvfs.File.read()` method fails to read binary (non-textual) files.
+  Use `xbmcvfs.File.readBytes()` instead.
 
 ## Utility Functions
 
