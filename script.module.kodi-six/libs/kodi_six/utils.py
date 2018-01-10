@@ -80,7 +80,7 @@ def patch_module(mod):
             cls = _wrap_class(obj)
             for memb_name, member in inspect.getmembers(cls):
                 # Do not patch special methods!
-                if (not memb_name.startswith('__') and
-                        inspect.ismethoddescriptor(member)):
+                if ((memb_name == '__init__' or not memb_name.startswith('__'))
+                        and inspect.ismethoddescriptor(member)):
                     setattr(cls, memb_name, encode_decode(member))
             setattr(mod, name, cls)
