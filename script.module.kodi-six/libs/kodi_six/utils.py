@@ -53,6 +53,7 @@ def encode_decode(func):
             mod_kwargs = {key: py2_encode(value) for key, value
                           in kwargs.iteritems()}
             return py2_decode(func(*mod_args, **mod_kwargs))
+        wrapper.__name__ = 'wrapped_func_{0}'.format(func.__name__)
         return wrapper
     return func
 
@@ -60,7 +61,7 @@ def encode_decode(func):
 def _wrap_class(cls):
     class ClassWrapper(cls):
         pass
-    ClassWrapper.__name__ = 'wrapped_{0}'.format(cls.__name__)
+    ClassWrapper.__name__ = 'wrapped_class_{0}'.format(cls.__name__)
     return ClassWrapper
 
 
