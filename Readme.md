@@ -33,7 +33,8 @@ In Python 3 those wrappers do not do anything.
 
 * Kodi Six is an experimental library, so issues may happen in specific cases.
 * Kodi Six wrappers normalize only string arguments and return values.
-  They do not touch strings inside containers like Python lists and dictionaries.
+  They do not touch strings inside containers like Python lists and dictionaries
+  passed to and received from Kodi API functions and methods.
 
 ## Usage
 
@@ -85,8 +86,20 @@ xbmc.log(some_string)  # No need to encode the string
 
 ## Known Issues
 
-* `xbmcvfs.File.read()` method fails to read binary (non-textual) files.
-  Use `xbmcvfs.File.readBytes()` instead.
+* `xbmcvfs.File.read()` can read only textual files in UTF-8
+  (or pure ASCII as a subset of UTF-8) encoding.
+  For binary (non-textual) files use `xbmcvfs.File.readBytes()` instead.
+  Textual files with encodings other than UTF-8 should be read as binary
+  files and decoded using the appropriate encoding:
+  
+```python
+from contextlib import closing
+from kodi_six import xbmcvfs
+
+with closing(xbmcvfs.File('/path/to/my/file.txt')) as fo:
+    byte_string = bytes(fo.readBytes())
+text_string = byte_string.decode('utf-16')
+```
 
 ## Utility Functions
 
