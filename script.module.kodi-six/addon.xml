@@ -14,5 +14,6 @@
     <license>GPL v.3</license>
     <forum>https://forum.kodi.tv/showthread.php?tid=327883</forum>
     <source>https://github.com/romanvm/kodi.six</source>
+    <news>- Do not patch class __init__ methods</news>
   </extension>
 </addon>
