@@ -92,14 +92,28 @@ xbmc.log(some_string)  # No need to encode the string
   Textual files with encodings other than UTF-8 should be read as binary
   files and decoded using the appropriate encoding:
   
-```python
-from contextlib import closing
-from kodi_six import xbmcvfs
+  ```python
+  from contextlib import closing
+  from kodi_six import xbmcvfs
 
-with closing(xbmcvfs.File('/path/to/my/file.txt')) as fo:
-    byte_string = bytes(fo.readBytes())
-text_string = byte_string.decode('utf-16')
-```
+  with closing(xbmcvfs.File('/path/to/my/file.txt')) as fo:
+      byte_string = bytes(fo.readBytes())
+  text_string = byte_string.decode('utf-16')
+  ```
+* `xbmcvfs.File.write()` accepts both `str` and `bytearray` arguments.
+  However, in Python 3 `str` represents a Unicode string, so a sequence of
+  bytes can only be passed as `bytearray`. If you are explicitly passing
+  a byte string (`str` in Python 2 or `bytes` in Python 3) to
+  `xbmcvfs.File.write()` you need to use `bytearray` for portability:
+  ```python
+  from contextlib import closing
+  from kodi_six import xbmcvfs
+  
+  text = u'текст українською мовою'
+  # Works both in Python 2 and 3
+  with closing(xbmcvfs.File('/path/to/my/file.txt', 'w')) as fo:
+      fo.write(bytearray(text.encode('utf-8')))
+  ```
 
 ## Utility Functions
 
