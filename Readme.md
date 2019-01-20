@@ -86,7 +86,7 @@ xbmc.log(some_string)  # No need to encode the string
 
 ## Known Issues
 
-* `xbmcvfs.File.read()` can read only textual files in UTF-8
+* In Python 3 `xbmcvfs.File.read()` can read only textual files in UTF-8
   (or pure ASCII as a subset of UTF-8) encoding.
   For binary (non-textual) files use `xbmcvfs.File.readBytes()` instead.
   Textual files with encodings other than UTF-8 should be read as binary
