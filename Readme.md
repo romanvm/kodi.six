@@ -102,9 +102,9 @@ xbmc.log(some_string)  # No need to encode the string
   ```
 * `xbmcvfs.File.write()` accepts both `str` and `bytearray` arguments.
   However, in Python 3 `str` represents a Unicode string, so a sequence of
-  bytes can only be passed as `bytearray`. If you are explicitly passing
+  bytes can only be passed as `bytearray`. If you are passing
   a byte string (`str` in Python 2 or `bytes` in Python 3) to
-  `xbmcvfs.File.write()` you need to use `bytearray` for portability:
+  `xbmcvfs.File.write()` you should use `bytearray` for portability:
   ```python
   from contextlib import closing
   from kodi_six import xbmcvfs
