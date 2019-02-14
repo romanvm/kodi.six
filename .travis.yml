@@ -1,0 +1,21 @@
+branches:
+  only:
+    - /\d+\.\d+\.\d+/
+language: python
+python: "3.6"
+env:
+  - ADDON_ID=script.module.kodi-six
+    BRANCH=gotham
+install:
+  - pip install kodi-addon-checker
+script:
+  - kodi-addon-checker --branch $BRANCH $ADDON_ID
+before_deploy:
+  - pip install -q git+https://github.com/romanvm/kodi-addon-submitter.git
+deploy:
+  - provider: script
+    script: submit-addon -r repo-scripts -b $BRANCH -s --pull-request $ADDON_ID
+    on:
+      tags: true
+notifications:
+  email: false
