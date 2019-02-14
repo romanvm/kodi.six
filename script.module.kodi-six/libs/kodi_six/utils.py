@@ -49,7 +49,7 @@ def encode_decode(func):
     """
     if PY2:
         def wrapper(*args, **kwargs):
-            mod_args = tuple((py2_encode(item) for item in args))
+            mod_args = tuple(py2_encode(item) for item in args)
             mod_kwargs = {key: py2_encode(value) for key, value
                           in kwargs.iteritems()}
             return py2_decode(func(*mod_args, **mod_kwargs))
