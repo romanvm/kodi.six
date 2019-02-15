@@ -1,6 +1,3 @@
-branches:
-  only:
-    - /\d+\.\d+\.\d+/
 language: python
 python: "3.6"
 env:
