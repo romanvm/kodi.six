@@ -34,7 +34,9 @@ In Python 3 those wrappers do not do anything.
 * Kodi Six is an experimental library, so issues may happen in specific cases.
 * Kodi Six wrappers normalize only string arguments and return values.
   They do not touch strings inside containers like Python lists and dictionaries
-  passed to and received from Kodi API functions and methods.
+  that are passed to and received from Kodi API functions and methods,
+  but containers can contain both `str` and `unicode`, so in most cases
+  they do not require special treatment.
 
 ## Usage
 
