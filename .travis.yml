@@ -2,7 +2,7 @@ language: python
 python: "3.6"
 env:
   - ADDON_ID=script.module.kodi-six
-    BRANCH=leia
+    BRANCH=gotham
 install:
   - pip install kodi-addon-checker
 script:
