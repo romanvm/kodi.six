@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 # (c) 2018, Roman Miroshnychenko <roman1972@gmail.com>
 # License: GPL v.3
-
+from __future__ import absolute_import, division, unicode_literals
 import os
 from xml.dom.minidom import parse
 from setuptools import setup, find_packages

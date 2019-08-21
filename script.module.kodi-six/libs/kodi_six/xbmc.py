@@ -5,13 +5,15 @@
 General classes and functions for interacting with Kodi
 """
 
-from __future__ import absolute_import
+# pylint: disable=import-error,unused-wildcard-import,wildcard-import
+
+from __future__ import absolute_import, division, unicode_literals
 import sys as _sys
 from .utils import PY2 as _PY2, ModuleWrapper as _ModuleWrapper
 
 if _PY2:
     import xbmc as _xbmc
-    _wrapped_xbmc = _ModuleWrapper(_xbmc)
-    _sys.modules[__name__] = _wrapped_xbmc
+    _WRAPPED_XBMC = _ModuleWrapper(_xbmc)
+    _sys.modules[__name__] = _WRAPPED_XBMC
 else:
-    from xbmc import *
+    from xbmc import *  # noqa

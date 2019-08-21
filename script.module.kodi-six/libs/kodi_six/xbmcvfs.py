@@ -5,13 +5,15 @@
 Functions and classes to work with files and folders
 """
 
-from __future__ import absolute_import
+# pylint: disable=import-error,unused-wildcard-import,wildcard-import
+
+from __future__ import absolute_import, division, unicode_literals
 import sys as _sys
 from .utils import PY2 as _PY2, ModuleWrapper as _ModuleWrapper
 
 if _PY2:
     import xbmcvfs as _xbmcvfs
-    _wrapped_xbmcvfs = _ModuleWrapper(_xbmcvfs)
-    _sys.modules[__name__] = _wrapped_xbmcvfs
+    _WRAPPED_XBMCVFS = _ModuleWrapper(_xbmcvfs)
+    _sys.modules[__name__] = _WRAPPED_XBMCVFS
 else:
-    from xbmcvfs import *
+    from xbmcvfs import *  # noqa

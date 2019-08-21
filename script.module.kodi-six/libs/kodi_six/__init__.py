@@ -5,7 +5,7 @@
 Wrappers around Kodi Python API that normalize byte and Unicode string handling
 """
 
-from __future__ import absolute_import
+from __future__ import absolute_import, division, unicode_literals
 from .utils import PY2, py2_encode, py2_decode, encode_decode
 
 __all__ = ['PY2', 'py2_encode', 'py2_decode', 'encode_decode']

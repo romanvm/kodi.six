@@ -5,13 +5,15 @@
 A class for working with DRM
 """
 
-from __future__ import absolute_import
+# pylint: disable=import-error,unused-wildcard-import,wildcard-import
+
+from __future__ import absolute_import, division, unicode_literals
 import sys as _sys
 from .utils import PY2 as _PY2, ModuleWrapper as _ModuleWrapper
 
 if _PY2:
     import xbmcdrm as _xbmcdrm
-    _wrapped_xbmcdrm = _ModuleWrapper(_xbmcdrm)
-    _sys.modules[__name__] = _wrapped_xbmcdrm
+    _WRAPPED_XBMCDRM = _ModuleWrapper(_xbmcdrm)
+    _sys.modules[__name__] = _WRAPPED_XBMCDRM
 else:
-    from xbmcdrm import *
+    from xbmcdrm import *  # noqa

@@ -1,18 +1,33 @@
 language: python
-python: "3.6"
+
+python:
+- '2.7'
+- '3.6'
+- '3.7'
+
 env:
-  - ADDON_ID=script.module.kodi-six
-    BRANCH=leia
+- ADDON_ID=script.module.kodi-six
+  BRANCH=leia
+
+sudo: false
+
 install:
-  - pip install kodi-addon-checker
+- pip install -r requirements.txt
+
 script:
-  - kodi-addon-checker --branch $BRANCH $ADDON_ID
+- tox
+- tox -e flake8
+- pylint $ADDON_ID/libs/kodi_six/
+- if [[ $TRAVIS_PYTHON_VERSION != 2.7 ]]; then (kodi-addon-checker --branch=$BRANCH $ADDON_ID); fi
+
 before_deploy:
-  - pip install -q git+https://github.com/romanvm/kodi-addon-submitter.git
+- pip install -q git+https://github.com/romanvm/kodi-addon-submitter.git
+
 deploy:
-  - provider: script
-    script: submit-addon -r repo-scripts -b $BRANCH -s --pull-request $ADDON_ID
-    on:
-      tags: true
+- provider: script
+  script: submit-addon -r repo-scripts -b $BRANCH -s --pull-request $ADDON_ID
+  on:
+    tags: true
+
 notifications:
   email: false

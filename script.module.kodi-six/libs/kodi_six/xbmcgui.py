@@ -5,13 +5,15 @@
 Classes and functions for interacting with Kodi GUI
 """
 
-from __future__ import absolute_import
+# pylint: disable=import-error,unused-wildcard-import,wildcard-import
+
+from __future__ import absolute_import, division, unicode_literals
 import sys as _sys
 from .utils import PY2 as _PY2, ModuleWrapper as _ModuleWrapper
 
 if _PY2:
     import xbmcgui as _xbmcgui
-    _wrapped_xbmcgui = _ModuleWrapper(_xbmcgui)
-    _sys.modules[__name__] = _wrapped_xbmcgui
+    _WRAPPED_XBMCGUI = _ModuleWrapper(_xbmcgui)
+    _sys.modules[__name__] = _WRAPPED_XBMCGUI
 else:
-    from xbmcgui import *
+    from xbmcgui import *  # noqa

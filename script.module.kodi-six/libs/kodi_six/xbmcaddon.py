@@ -5,13 +5,15 @@
 A class for accessing addon properties
 """
 
-from __future__ import absolute_import
+# pylint: disable=import-error,unused-wildcard-import,wildcard-import
+
+from __future__ import absolute_import, division, unicode_literals
 import sys as _sys
 from .utils import PY2 as _PY2, ModuleWrapper as _ModuleWrapper
 
 if _PY2:
     import xbmcaddon as _xbmcaddon
-    _wrapped_xbmcaddon = _ModuleWrapper(_xbmcaddon)
-    _sys.modules[__name__] = _wrapped_xbmcaddon
+    _WRAPPED_XBMCADDON = _ModuleWrapper(_xbmcaddon)
+    _sys.modules[__name__] = _WRAPPED_XBMCADDON
 else:
-    from xbmcaddon import *
+    from xbmcaddon import *  # noqa

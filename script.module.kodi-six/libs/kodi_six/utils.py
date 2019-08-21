@@ -5,6 +5,7 @@
 Utility functions for string conversion depending on Python version
 """
 
+from __future__ import absolute_import, division, unicode_literals
 import sys
 import inspect
 
@@ -20,26 +21,26 @@ __all__ = [
 PY2 = sys.version_info[0] == 2  #: ``True`` for Python 2
 
 
-def py2_encode(s, encoding='utf-8'):
+def py2_encode(string, encoding='utf-8'):
     """
     Encode Python 2 ``unicode`` to ``str``
 
     In Python 3 the string is not changed.
     """
-    if PY2 and isinstance(s, unicode):
-        s = s.encode(encoding)
-    return s
+    if PY2 and isinstance(string, unicode):  # pylint: disable=undefined-variable
+        string = string.encode(encoding)
+    return string
 
 
-def py2_decode(s, encoding='utf-8'):
+def py2_decode(string, encoding='utf-8'):
     """
     Decode Python 2 ``str`` to ``unicode``
 
     In Python 3 the string is not changed.
     """
-    if PY2 and isinstance(s, str):
-        s = s.decode(encoding)
-    return s
+    if PY2 and isinstance(string, str):
+        string = string.decode(encoding)
+    return string
 
 
 def encode_decode(func):
@@ -56,9 +57,10 @@ def encode_decode(func):
     """
     if PY2:
         def wrapper(*args, **kwargs):
+            """ wrappper helper """
             mod_args = tuple(py2_encode(item) for item in args)
             mod_kwargs = {key: py2_encode(value) for key, value
-                          in kwargs.iteritems()}
+                          in kwargs.iteritems()}  # pylint: disable=no-member
             return py2_decode(func(*mod_args, **mod_kwargs))
         wrapper.__name__ = 'wrapped_func_{0}'.format(func.__name__)
         return wrapper
@@ -66,9 +68,11 @@ def encode_decode(func):
 
 
 def _wrap_class(cls):
-    class ClassWrapper(cls):
-        pass
-    ClassWrapper.__name__ = 'wrapped_class_{0}'.format(cls.__name__)
+    """ Wrapper class """
+    class ClassWrapper(cls):  # pylint: disable=too-few-public-methods
+        """ Class wrapper """
+
+    ClassWrapper.__name__ = str('wrapped_class_{0}'.format(cls.__name__))
     return ClassWrapper
 
 
@@ -86,13 +90,12 @@ def patch_object(obj):
         obj = _wrap_class(obj)
         for memb_name, member in inspect.getmembers(obj):
             # Do not patch special methods!
-            if (inspect.ismethoddescriptor(member) and
-                    not memb_name.endswith('__')):
+            if (inspect.ismethoddescriptor(member) and not memb_name.endswith('__')):
                 setattr(obj, memb_name, encode_decode(member))
     return obj
 
 
-class ModuleWrapper(object):
+class ModuleWrapper:  # pylint: disable=too-few-public-methods
     """
     Implements lazy patching of Kodi Python API modules
 
