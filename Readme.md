@@ -69,7 +69,7 @@ path = addon.getAddonInfo('path').decode('utf-8')  # This will break in Python 3
 
 some_string = u'текст українською мовою'
 # xbmc.log won't accept non-ASCII Unicode
-xbmc.log(some_string.encode('utf-8'))  # This will break in Python 3 too!
+xbmc.log(some_string)  # This will break in Python 3 too!
 ```
 
 Python 2 and 3:
